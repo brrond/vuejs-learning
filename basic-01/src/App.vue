@@ -15,6 +15,10 @@ function inputAction(event: Event) {
 function confirmInput(_: Event) {
   confirmedUserInput.value = userInput.value;
 }
+
+function resetInput() {
+  confirmedUserInput.value = "";
+}
 </script>
 
 <template>
@@ -32,6 +36,7 @@ function confirmInput(_: Event) {
 
     <input type="text" @input="inputAction" @keypress.enter="confirmInput"/>
     <p>{{confirmedUserInput}}</p>
+    <button @click="resetInput">Reset Input</button>
   </section>
 </template>
 
