@@ -1,41 +1,37 @@
 <script setup lang="ts">
 import { ref } from 'vue';
 
+var userInput = ref("");
+var confirmedUserInput = ref("");
 
-var counter = ref(0)
-var name = ref("")
-
-function add(num: number) {
-  counter.value += num;
+function showAlert() {
+  alert("Some text");
 }
 
-function setName(event: Event) {
-  name.value = event.target.value;
+function inputAction(event: Event) {
+  userInput.value = event.target.value;
 }
 
-function formFunction(event: Event) {
-  alert(event.target);
-
+function confirmInput(_: Event) {
+  confirmedUserInput.value = userInput.value;
 }
 </script>
 
 <template>
   <header>
-    <h1>Vue Events</h1>
+    <h1>Events</h1>
   </header>
-  <section id="events">
-    <h2>Events in Action</h2>
-    <button v-on:click="add(5)">Add 5</button>
-    <button v-on:click="counter = 0">Reset</button>
-    <button v-on:click="add(-5)">Subtract 5</button>
-    <p>Result: {{ counter }}</p>
-    <input type="text" v-on:input="setName">
-    <p>Your Name: {{name}}</p>
+  <section id="assignment">
+    <h2>Event Practice</h2>
+    <button @click="showAlert()">Show Alert</button>
+    <hr/>
 
-    <form action="POST" @submit.prevent="formFunction">
-      <input id="name" type="text">
-      <button>Some</button>
-    </form>
+    <input type="text" @input="inputAction"/>
+    <p>{{userInput}}</p>
+    <hr/>
+
+    <input type="text" @input="inputAction" @keypress.enter="confirmInput"/>
+    <p>{{confirmedUserInput}}</p>
   </section>
 </template>
 
