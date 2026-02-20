@@ -1,49 +1,63 @@
 <script setup lang="ts">
-import { computed, ref, watch } from 'vue';
+import { ref } from 'vue';
 
-const goal = 37;
-var calculatedNumber = ref(0);
-var active = ref(true);
-var valueToShow = computed(() => {
-  if (calculatedNumber.value < goal) {
-    return "Not there yet";
-  } else if (calculatedNumber.value > goal) {
-    return "Too much!";
+var userInput = ref('');
+var user1Active = ref(false);
+var user2Active = ref(false);
+
+function handleUserInput(event: Event) {
+  userInput.value = event.target.value;
+  if (userInput.value === "user1") {
+    user1Active.value = true;
+    user2Active.value = false;
+  } else if (userInput.value === "user2") {
+    user1Active.value = false;
+    user2Active.value = true;
   } else {
-    return calculatedNumber.value.toString();
+    user1Active.value = false;
+    user2Active.value = false;
   }
-});
-
-function add(n: number) {
-  calculatedNumber.value += n;
 }
 
-watch(calculatedNumber, (newValue) => {
-  if (newValue > goal) {
-    setTimeout(() => {
-      calculatedNumber.value = 0;
-      active.value = true;
-    }, 2000);
-    active.value = false;
-  } else if (newValue == goal) {
-    setTimeout(() => {
-      calculatedNumber.value = 0;
-      active.value = true;
-    }, 5000);
-    active.value = false;
-  }
-});
+var isVisible = ref(true);
+
+function toggleVisibility() {
+  isVisible.value = !isVisible.value;
+}
+
+var color = ref("");
 </script>
 
 <template>
   <header>
-    <h1>Reactivity in Action</h1>
+    <h1>Vue Styling</h1>
   </header>
   <section id="assignment">
-    <button @click="add(5)" v-bind:disabled="!active">Add 5</button>
-    <button @click="add(1)" v-bind:disabled="!active">Add 1</button>
-    <p>{{valueToShow}}</p>
+    <input type="text" @input="handleUserInput"/>
+    <p :class="{user1: user1Active, user2: user2Active, visible: isVisible, hidden: !isVisible}">Style me!</p>
+    <button @click="toggleVisibility">Toggle Paragraph</button>
+
+    <input type="text" v-model="color"/>
+    <p :style="{color: color}">Style me inline!</p>
   </section>
 </template>
 
-<style scoped></style>
+<style scoped>
+.user1 {
+  background-color: blue;
+  color: white;
+}
+
+.user2 {
+  background-color: purple;
+  color: white;
+}
+
+.hidden {
+  display: none;
+}
+
+.visible {
+  display: block;
+}
+</style>
