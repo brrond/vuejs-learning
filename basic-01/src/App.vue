@@ -1,23 +1,41 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 
-const name = "Danya";
-const age = 23;
 
-function getImageUrl() {
-  return "https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fpreview.redd.it%2Fthe-most-random-image-every-seen-in-the-history-of-the-v0-iuzrc59aw2sb1.jpg%3Fwidth%3D1024%26format%3Dpjpg%26auto%3Dwebp%26s%3Ddd018a25303363415b10f1906c2d4b25fa47043f&f=1&nofb=1&ipt=eea075ba0922d8fbd4c8ad78e82ce90e8e5227455ab8eb35331083aba6a3c5a9";
+var counter = ref(0)
+var name = ref("")
+
+function add(num: number) {
+  counter.value += num;
+}
+
+function setName(event: Event) {
+  name.value = event.target.value;
+}
+
+function formFunction(event: Event) {
+  alert(event.target);
+
 }
 </script>
 
 <template>
-  <section id="assignment">
-    <h2>{{ name }}</h2>
-    <p>{{ age }}</p>
-    <p>{{ age + 5}}</p>
-    <p>Favorite Number: {{Math.random()}}</p>
-    <div>
-      <img :src="getImageUrl()" />
-    </div>
-    <input type="text" :value="name"/>
+  <header>
+    <h1>Vue Events</h1>
+  </header>
+  <section id="events">
+    <h2>Events in Action</h2>
+    <button v-on:click="add(5)">Add 5</button>
+    <button v-on:click="counter = 0">Reset</button>
+    <button v-on:click="add(-5)">Subtract 5</button>
+    <p>Result: {{ counter }}</p>
+    <input type="text" v-on:input="setName">
+    <p>Your Name: {{name}}</p>
+
+    <form action="POST" @submit.prevent="formFunction">
+      <input id="name" type="text">
+      <button>Some</button>
+    </form>
   </section>
 </template>
 
