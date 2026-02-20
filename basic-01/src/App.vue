@@ -1,42 +1,48 @@
 <script setup lang="ts">
-import { ref } from 'vue';
+import { computed, ref, watch } from 'vue';
 
-var userInput = ref("");
-var confirmedUserInput = ref("");
+const goal = 37;
+var calculatedNumber = ref(0);
+var active = ref(true);
+var valueToShow = computed(() => {
+  if (calculatedNumber.value < goal) {
+    return "Not there yet";
+  } else if (calculatedNumber.value > goal) {
+    return "Too much!";
+  } else {
+    return calculatedNumber.value.toString();
+  }
+});
 
-function showAlert() {
-  alert("Some text");
+function add(n: number) {
+  calculatedNumber.value += n;
 }
 
-function inputAction(event: Event) {
-  userInput.value = event.target.value;
-}
-
-function confirmInput(_: Event) {
-  confirmedUserInput.value = userInput.value;
-}
-
-function resetInput() {
-  confirmedUserInput.value = "";
-}
+watch(calculatedNumber, (newValue) => {
+  if (newValue > goal) {
+    setTimeout(() => {
+      calculatedNumber.value = 0;
+      active.value = true;
+    }, 2000);
+    active.value = false;
+  } else if (newValue == goal) {
+    setTimeout(() => {
+      calculatedNumber.value = 0;
+      active.value = true;
+    }, 5000);
+    active.value = false;
+  }
+});
 </script>
 
 <template>
   <header>
-    <h1>Events</h1>
+    <h1>Reactivity in Action</h1>
   </header>
   <section id="assignment">
-    <h2>Event Practice</h2>
-    <button @click="showAlert()">Show Alert</button>
-    <hr/>
-
-    <input type="text" @input="inputAction"/>
-    <p>{{userInput}}</p>
-    <hr/>
-
-    <input type="text" @input="inputAction" @keypress.enter="confirmInput"/>
-    <p>{{confirmedUserInput}}</p>
-    <button @click="resetInput">Reset Input</button>
+    <button @click="add(5)" v-bind:disabled="!active">Add 5</button>
+    <button @click="add(1)" v-bind:disabled="!active">Add 1</button>
+    <p>{{valueToShow}}</p>
   </section>
 </template>
 
