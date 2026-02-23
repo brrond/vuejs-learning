@@ -1,35 +1,37 @@
 <script setup lang="ts">
 import { ref, type Ref } from 'vue';
 
-var goals: Ref<String[]> = ref([]);
-var inputGoal = ref("");
+var tasks: Ref<String[]> = ref([]);
+var taskInputValue = ref("");
+var renderList = ref(true);
 
-function addGoal() {
-  if (inputGoal.value === "") {
+function addTask() {
+  if (taskInputValue.value === "") {
     return;
   }
-  goals.value.push(inputGoal.value);
-  inputGoal.value = "";
+  tasks.value.push(taskInputValue.value);
+  taskInputValue.value = "";
 }
 
-function removeGoal(index: number) {
-  goals.value.splice(index, 1);
+function toggleListVilibility() {
+  renderList.value = !renderList.value;
 }
 </script>
 
 <template>
   <header>
-    <h1>Vue Course Goals</h1>
+    <h1>Vue Lists and Conditional Content</h1>
   </header>
-  <section id="user-goals">
-    <h2>My course goals</h2>
-    <input type="text" v-model="inputGoal"/>
-    <button @click="addGoal">Add Goal</button>
-    <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
-    <ul v-else>
-      <li v-for="(goal, index) in goals" @click="removeGoal(index)">{{goal}}</li>
+  <section id="assignment">
+    <h2>Assignment</h2>
+    <input type="text" v-model="taskInputValue" />
+    <button @click="addTask">Add Task</button>
+    <ul v-if="tasks.length != 0 && renderList">
+      <li v-for="task in tasks">{{ task }}</li>
     </ul>
+    <button @click="toggleListVilibility">Hide / Show List</button>
   </section>
+
 </template>
 
 <style scoped></style>
