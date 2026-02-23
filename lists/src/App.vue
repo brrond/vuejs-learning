@@ -1,11 +1,18 @@
 <script setup lang="ts"></script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <header>
+    <h1>Vue Course Goals</h1>
+  </header>
+  <section id="user-goals">
+    <h2>My course goals</h2>
+    <input type="text" />
+    <button>Add Goal</button>
+    <p>No goals have been added yet - please start adding some!</p>
+    <ul>
+      <li>Goal</li>
+    </ul>
+  </section>
 </template>
 
 <style scoped></style>
