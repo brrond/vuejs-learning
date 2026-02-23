@@ -5,8 +5,15 @@ var goals: Ref<String[]> = ref([]);
 var inputGoal = ref("");
 
 function addGoal() {
+  if (inputGoal.value === "") {
+    return;
+  }
   goals.value.push(inputGoal.value);
+  inputGoal.value = "";
+}
 
+function removeGoal(index: number) {
+  goals.value.splice(index, 1);
 }
 </script>
 
@@ -20,6 +27,7 @@ function addGoal() {
     <button @click="addGoal">Add Goal</button>
     <p v-if="goals.length === 0">No goals have been added yet - please start adding some!</p>
     <ul v-else>
+      <li v-for="(goal, index) in goals" @click="removeGoal(index)">{{goal}}</li>
     </ul>
   </section>
 </template>
