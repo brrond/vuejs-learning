@@ -1,8 +1,8 @@
-import { createApp } from 'vue';
-import App from './App.vue';
-import FriendContact from './components/FriendContact.vue';
+import { createApp } from 'vue'
+import App from './App.vue'
 
-const app = createApp(App);
+createApp(App).mount('#app')
 
-app.component("friend-contact", FriendContact);
-app.mount('#app');
+// Task 3: Add user data and ensure it contains a name and age
+// User data should be output in ActiveUser
+// It should be updated via the UserData component
