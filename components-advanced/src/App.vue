@@ -1,11 +1,34 @@
-<script setup lang="ts"></script>
+<script lang="ts" setup>
+import { ref } from 'vue'
+import BadgeList from './components/BadgeList.vue'
+import TheHeader from './components/TheHeader.vue'
+import UserInfo from './components/UserInfo.vue'
+
+const activeUser = ref({
+  name: 'Maximilian Schwarzmüller',
+  description: 'Site owner and admin',
+  role: 'admin',
+})
+</script>
 
 <template>
-  <h1>You did it!</h1>
-  <p>
-    Visit <a href="https://vuejs.org/" target="_blank" rel="noopener">vuejs.org</a> to read the
-    documentation
-  </p>
+  <div>
+    <TheHeader></TheHeader>
+    <BadgeList></BadgeList>
+    <UserInfo
+      :full-name="activeUser.name"
+      :info-text="activeUser.description"
+      :role="activeUser.role"
+    ></UserInfo>
+  </div>
 </template>
 
-<style scoped></style>
+<style>
+html {
+  font-family: sans-serif;
+}
+
+body {
+  margin: 0;
+}
+</style>
