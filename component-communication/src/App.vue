@@ -1,18 +1,30 @@
 <script setup lang="ts">
-const friends = [
+import { ref } from 'vue';
+
+const friends = ref([
   {
     id: "manuel",
     name: "Manuel Lorenz",
     phone: "0123 45678 90",
     email: "manuel@localhost.com",
+    isFavorite: true,
   },
   {
     id: "julie",
     name: "Julie Jones",
     phone: "0987 654421 21",
     email: "julie@localhost.com",
+    isFavorite: false,
   },
-];
+])
+
+function toggleFavorite(id: string) {
+  const foundFriend = friends.value.find(friend => friend.id === id)
+  if (foundFriend === undefined) {
+    return;
+  }
+  foundFriend.isFavorite = !foundFriend.isFavorite
+}
 </script>
 
 <template>
@@ -21,8 +33,16 @@ const friends = [
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-contact name="Some Name" phone-number="01234 78992" email="some@name.com" :is-favorite="true"></friend-contact>
-      <friend-contact name="Some Other Name" phone-number="8992" email="some-other@name.com"></friend-contact>
+      <friend-contact 
+        v-for="friend in friends" 
+        :key="friend.id" 
+        :id="friend.id" 
+        :name="friend.name"
+        :phone-number="friend.phone" 
+        :email="friend.email" 
+        :is-favorite="friend.isFavorite"
+        @toggle-favorite="toggleFavorite">
+      </friend-contact>
     </ul>
   </section>
 </template>
