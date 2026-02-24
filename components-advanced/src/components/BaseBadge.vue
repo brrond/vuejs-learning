@@ -1,19 +1,20 @@
-<script lang="ts">
-export default {
-  props: ['type', 'caption'],
-  computed: {
-    classes() {
-      return {
-        'badge--admin': this.type === 'admin',
-        'badge--author': this.type === 'author',
-      }
-    },
-  },
-}
+<script lang="ts" setup>
+import { computed } from 'vue'
+
+const props = defineProps({
+  type: { type: String, required: true },
+  caption: { type: String, required: true },
+})
+
+const classes = computed(() => {
+  return {
+    'badge--admin': props.type === 'admin',
+    'badge--author': props.type === 'author',
+  }
+})
 </script>
 
 <template>
-  <h1>some</h1>
   <span class="badge" :class="classes">{{ caption }}</span>
 </template>
 

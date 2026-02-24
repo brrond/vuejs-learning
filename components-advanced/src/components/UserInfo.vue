@@ -1,7 +1,9 @@
-<script lang="ts">
-export default {
-  props: ['fullName', 'infoText', 'role'],
-}
+<script lang="ts" setup>
+const props = defineProps({
+  fullName: {type: String, required: true},
+  infoText: {type: String, required: true},
+  role: {type: String, required: true},
+})
 </script>
 
 <template>

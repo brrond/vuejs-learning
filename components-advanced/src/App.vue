@@ -15,11 +15,7 @@ const activeUser = ref({
   <div>
     <TheHeader></TheHeader>
     <BadgeList></BadgeList>
-    <UserInfo
-      :full-name="activeUser.name"
-      :info-text="activeUser.description"
-      :role="activeUser.role"
-    ></UserInfo>
+    <UserInfo :full-name="activeUser.name" :info-text="activeUser.description" :role="activeUser.role"></UserInfo>
   </div>
 </template>
 
