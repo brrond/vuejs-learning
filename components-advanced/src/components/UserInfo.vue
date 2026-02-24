@@ -1,25 +1,21 @@
 <script lang="ts" setup>
+import BaseCard from './BaseCard.vue'
+import BaseBadge from './BaseBadge.vue';
+
 const props = defineProps({
-  fullName: {type: String, required: true},
-  infoText: {type: String, required: true},
-  role: {type: String, required: true},
+  fullName: { type: String, required: true },
+  infoText: { type: String, required: true },
+  role: { type: String, required: true },
 })
 </script>
 
 <template>
-  <section>
+  <BaseCard>
     <div>
       <h3>{{ fullName }}</h3>
-      <base-badge :type="role" :caption="role.toUpperCase()"></base-badge>
+      <BaseBadge :type="role" :caption="role.toUpperCase()"></BaseBadge>
     </div>
     <p>{{ infoText }}</p>
-  </section>
+  </BaseCard>
 </template>
 
-<style scoped>
-section div {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-</style>
