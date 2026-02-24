@@ -21,7 +21,7 @@ const friends = [
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-contact name="Some Name" phone-number="01234 78992" email="some@name.com"></friend-contact>
+      <friend-contact name="Some Name" phone-number="01234 78992" email="some@name.com" :is-favorite="true"></friend-contact>
       <friend-contact name="Some Other Name" phone-number="8992" email="some-other@name.com"></friend-contact>
     </ul>
   </section>
