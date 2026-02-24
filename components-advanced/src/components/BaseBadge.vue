@@ -18,7 +18,7 @@ const classes = computed(() => {
   <span class="badge" :class="classes">{{ caption }}</span>
 </template>
 
-<style>
+<style scoped>
 .badge {
   display: inline-block;
   padding: 0.5rem 1rem;
