@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
+import NewFriend from './components/NewFriend.vue';
 
 const friends = ref([
   {
@@ -25,6 +26,16 @@ function toggleFavorite(id: string) {
   }
   foundFriend.isFavorite = !foundFriend.isFavorite
 }
+
+function addNewFriend(name: string, phoneNumber: string, email: string) {
+  friends.value.push({
+    id: name.split(" ")[0]!,
+    name: name,
+    phone: phoneNumber,
+    email: email,
+    isFavorite: false,
+  })
+}
 </script>
 
 <template>
@@ -33,17 +44,12 @@ function toggleFavorite(id: string) {
       <h1>My Friends</h1>
     </header>
     <ul>
-      <friend-contact 
-        v-for="friend in friends" 
-        :key="friend.id" 
-        :id="friend.id" 
-        :name="friend.name"
-        :phone-number="friend.phone" 
-        :email="friend.email" 
-        :is-favorite="friend.isFavorite"
+      <friend-contact v-for="friend in friends" :key="friend.id" :id="friend.id" :name="friend.name"
+        :phone-number="friend.phone" :email="friend.email" :is-favorite="friend.isFavorite"
         @toggle-favorite="toggleFavorite">
       </friend-contact>
     </ul>
+    <NewFriend @add-new-friend="addNewFriend"></NewFriend>
   </section>
 </template>
 
