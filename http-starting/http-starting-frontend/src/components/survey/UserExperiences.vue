@@ -5,10 +5,12 @@
       <div>
         <base-button @click="loadExperiences">Load Submitted Experiences</base-button>
       </div>
-      <ul>
+      <p v-if="isLoading">Loading results...</p>
+      <ul v-else-if="results.length !== 0">
         <survey-result v-for="result in results" :key="result.id" :name="result.name"
           :rating="result.rating"></survey-result>
       </ul>
+      <p v-else>There is no data.</p>
     </base-card>
   </section>
 </template>
@@ -23,10 +25,12 @@ export default {
   data() {
     return {
       results: [],
+      isLoading: false,
     };
   },
   methods: {
     loadExperiences() {
+      this.isLoading = true;
       fetch('http://localhost:1080/get')
         .then((response) => {
           if (response.ok) {
@@ -43,8 +47,12 @@ export default {
             });
           }
           this.results = results;
+          this.isLoading = false;
         });
     },
+  },
+  mounted() {
+    this.loadExperiences();
   },
 };
 </script>
