@@ -1,0 +1,50 @@
+[
+  {
+    "httpRequest": {
+      "path": "/save"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Access-Control-Allow-Origin": [
+          "*"
+        ],
+        "Access-Control-Allow-Methods": [
+          "GET",
+          "POST",
+          "OPTIONS"
+        ],
+        "Access-Control-Allow-Headers": [
+          "Content-Type"
+        ]
+      },
+      "body": {
+        "id": "5"
+      }
+    }
+  },
+  {
+    "httpRequest": {
+      "path": "/get"
+    },
+    "httpResponse": {
+      "statusCode": 200,
+      "headers": {
+        "Access-Control-Allow-Origin": [
+          "*"
+        ],
+        "Access-Control-Allow-Methods": [
+          "GET",
+          "POST",
+          "OPTIONS"
+        ],
+        "Access-Control-Allow-Headers": [
+          "Content-Type"
+        ]
+      },
+      "body": {
+        "id": "5"
+      }
+    }
+  }
+]
