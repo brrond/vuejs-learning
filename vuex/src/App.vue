@@ -2,6 +2,7 @@
 import { useStore } from 'vuex'
 import BaseContainer from './components/BaseContainer.vue'
 import { ref } from 'vue'
+import UserAuth from './components/UserAuth.vue'
 
 const store = useStore()
 
@@ -9,7 +10,8 @@ const val = ref(10)
 </script>
 
 <template>
-  <base-container title="Vuex">
+  <user-auth></user-auth>
+  <base-container v-if="store.getters.isAuthenticated" title="Vuex">
     <h3>{{ store.getters.getCounter }}</h3>
     <button @click="
       store.commit({
@@ -19,7 +21,6 @@ const val = ref(10)
       ">
       Add {{ val }}
     </button>
-
     <button @click="store.dispatch('increment')">Increment</button>
   </base-container>
 </template>
