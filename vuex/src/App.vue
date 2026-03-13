@@ -19,6 +19,8 @@ const val = ref(10)
       ">
       Add {{ val }}
     </button>
+
+    <button @click="store.dispatch('increment')">Increment</button>
   </base-container>
 </template>
 
