@@ -26,7 +26,6 @@ export default {
     updateList(teamId) {
       const selectedTeam = this.teams.find((team) => team.id === teamId);
 
-      console.log(selectedTeam);
       this.members = selectedTeam.members.map((id) => {
         console.log(id);
         return this.users.find((u) => u.id === id);
