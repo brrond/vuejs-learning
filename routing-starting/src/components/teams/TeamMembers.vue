@@ -15,23 +15,33 @@ export default {
   components: {
     UserItem,
   },
+  props: ['teamId'],
   data() {
     return {
       teamName: '',
       members: [],
     };
   },
+  methods: {
+    updateList(teamId) {
+      const selectedTeam = this.teams.find((team) => team.id === teamId);
+
+      console.log(selectedTeam);
+      this.members = selectedTeam.members.map((id) => {
+        console.log(id);
+        return this.users.find((u) => u.id === id);
+      });
+
+      this.teamName = selectedTeam.name;
+    },
+  },
   created() {
-    const teamId = this.$route.params.teamId;
-    const selectedTeam = this.teams.find((team) => (team.id === teamId));
-
-    console.log(selectedTeam);
-    this.members = selectedTeam.members.map((id) => {
-      console.log(id);
-      return this.users.find((u) => u.id === id);
-    });
-
-    this.teamName = selectedTeam.name;
+    this.updateList(this.teamId);
+  },
+  watch: {
+    teamId(newTeamId) {
+      this.updateList(newTeamId);
+    },
   },
 };
 </script>
