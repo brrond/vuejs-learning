@@ -42,9 +42,23 @@
           "Content-Type"
         ]
       },
-      "body": {
-        "id": "5"
-      }
+      "body": [
+        {
+          "id": 1,
+          "name": "Some Name",
+          "rating": "poor"
+        },
+        {
+          "id": 2,
+          "name": "Some Other Name",
+          "rating": "average"
+        },
+        {
+          "id": 3,
+          "name": "Hey There",
+          "rating": "great"
+        }
+      ]
     }
   }
 ]

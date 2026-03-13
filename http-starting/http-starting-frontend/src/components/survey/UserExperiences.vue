@@ -3,15 +3,11 @@
     <base-card>
       <h2>Submitted Experiences</h2>
       <div>
-        <base-button>Load Submitted Experiences</base-button>
+        <base-button @click="loadExperiences">Load Submitted Experiences</base-button>
       </div>
       <ul>
-        <survey-result
-          v-for="result in results"
-          :key="result.id"
-          :name="result.name"
-          :rating="result.rating"
-        ></survey-result>
+        <survey-result v-for="result in results" :key="result.id" :name="result.name"
+          :rating="result.rating"></survey-result>
       </ul>
     </base-card>
   </section>
@@ -21,9 +17,34 @@
 import SurveyResult from './SurveyResult.vue';
 
 export default {
-  props: ['results'],
   components: {
     SurveyResult,
+  },
+  data() {
+    return {
+      results: [],
+    };
+  },
+  methods: {
+    loadExperiences() {
+      fetch('http://localhost:1080/get')
+        .then((response) => {
+          if (response.ok) {
+            return response.json();
+          }
+        })
+        .then((data) => {
+          const results = [];
+          for (const item of data) {
+            results.push({
+              id: item.id,
+              name: item.name,
+              rating: item.rating,
+            });
+          }
+          this.results = results;
+        });
+    },
   },
 };
 </script>
