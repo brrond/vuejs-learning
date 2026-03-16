@@ -24,10 +24,16 @@
   </header>
 </template>
 
-<script lang="ts">
-export default {
-  inject: ['isLoggedIn', 'login', 'logout', 'cart'],
-}
+<script setup lang="ts">
+import { inject } from 'vue'
+import { useStore } from 'vuex'
+
+const isLoggedIn = inject('isLoggedIn')
+const login = inject('login')
+const logout = inject('logout')
+
+const store = useStore()
+const cart = store.getters.getCart
 </script>
 
 <style scoped>

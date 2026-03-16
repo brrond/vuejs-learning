@@ -31,12 +31,47 @@ const store = createStore({
           price: 6.99,
         },
       ],
+      cart: { items: [], total: 0, qty: 0 },
     };
   },
-  mutations: {},
+  mutations: {
+    addProductToCart(state, productData) {
+      const productInCartIndex = state.cart.items.findIndex(
+        (ci) => ci.productId === productData.val.id,
+      );
+
+      if (productInCartIndex >= 0) {
+        state.cart.items[productInCartIndex].qty++;
+      } else {
+        const newItem = {
+          productId: productData.val.id,
+          title: productData.val.title,
+          image: productData.val.image,
+          price: productData.val.price,
+          qty: 1,
+        };
+        state.cart.items.push(newItem);
+      }
+      state.cart.qty++;
+      state.cart.total += productData.val.price;
+    },
+
+    removeProductFromCart(state, prodId) {
+      const productInCartIndex = state.cart.items.findIndex(
+        (cartItem) => cartItem.productId === prodId,
+      );
+      const prodData = state.cart.items[productInCartIndex];
+      state.cart.items.splice(productInCartIndex, 1);
+      state.cart.qty -= prodData.qty;
+      state.cart.total -= prodData.price * prodData.qty;
+    },
+  },
   getters: {
     getProducts(state) {
       return state.products;
+    },
+    getCart(state) {
+      return state.cart;
     },
   },
 });

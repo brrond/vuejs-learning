@@ -15,27 +15,32 @@
           <strong>{{ qty }}</strong>
         </div>
       </div>
-      <div class="item__total">Total: ${{ itemTotal }}</div>
+      <div class="item__total">Total: ${{ itemTotal() }}</div>
       <button @click="remove">Remove</button>
     </div>
   </li>
 </template>
 
-<script>
-export default {
-  inject: ['removeProductFromCart'],
-  props: ['prodId', 'title', 'image', 'price', 'qty'],
-  computed: {
-    itemTotal() {
-      return (this.price * this.qty).toFixed(2);
-    }
-  },
-  methods: {
-    remove() {
-      this.removeProductFromCart(this.prodId);
-    }
-  }
-};
+<script setup lang="ts">
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const props = defineProps({
+  prodId: Number,
+  title: String,
+  image: String,
+  price: Number,
+  qty: Number,
+})
+
+function itemTotal() {
+  return (props.price * props.qty).toFixed(2)
+}
+
+function remove() {
+  store.commit('removeProductFromCart', props.prodId)
+}
 </script>
 
 <style scoped>

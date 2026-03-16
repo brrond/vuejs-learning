@@ -18,21 +18,30 @@
   </li>
 </template>
 
-<script lang="ts">
-export default {
-  inject: ['addProductToCart'],
-  props: ['id', 'image', 'title', 'price', 'description'],
-  methods: {
-    addToCart() {
-      this.addProductToCart({
-        id: this.id,
-        image: this.image,
-        title: this.title,
-        price: this.price,
-      });
+<script setup lang="ts">
+import { useStore } from 'vuex'
+
+const store = useStore()
+
+const props = defineProps({
+  id: Number,
+  image: String,
+  title: String,
+  price: Number,
+  description: String,
+})
+
+function addToCart() {
+  store.commit({
+    type: 'addProductToCart',
+    val: {
+      id: props.id,
+      image: props.image,
+      title: props.title,
+      price: props.price,
     },
-  },
-};
+  })
+}
 </script>
 
 <style scoped>
