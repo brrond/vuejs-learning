@@ -3,8 +3,8 @@ import { createRouter, createWebHistory } from 'vue-router';
 
 import Dashboard from './views/Dashboard.vue';
 import Forms from './views/Forms.vue';
-import Tables from './views/Tables.vue';
 import UIElements from './views/UIElements.vue';
+import Requests from './views/Requests.vue';
 
 const routes: RouteRecordRaw[] = [
   {
@@ -22,9 +22,9 @@ const routes: RouteRecordRaw[] = [
     component: Forms,
   },
   {
-    path: '/tables',
-    name: 'Tables',
-    component: Tables,
+    path: '/requests',
+    name: 'Requests',
+    component: Requests,
   },
   {
     path: '/ui-elements',

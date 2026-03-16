@@ -16,7 +16,10 @@ export const store = createStore<State>({
             new Coach(1, "Manuel Lorenz", 39, ["Frontend", "Backend"]),
             new Coach(2, "Maximilian Schwarzmüller", 29, ["Frontend"])
         ],
-        requests: [],
+        requests: [
+            new Request(1, "My Name", "my@email.com", "Some comment here.", 1),
+            new Request(2, "Another User D", "d@user.com", "Some other comment here.", 1)
+        ],
     },
     mutations: {},
     getters: {
