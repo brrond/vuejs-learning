@@ -18,7 +18,7 @@
   </li>
 </template>
 
-<script>
+<script lang="ts">
 export default {
   inject: ['addProductToCart'],
   props: ['id', 'image', 'title', 'price', 'description'],

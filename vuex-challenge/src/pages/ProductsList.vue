@@ -1,21 +1,17 @@
 <template>
   <section>
     <ul>
-      <product-item v-for="prod in products" :key="prod.id" :id="prod.id" :title="prod.title" :image="prod.image"
+      <product-item v-for="prod in store.getters.getProducts" :key="prod.id" :id="prod.id" :title="prod.title" :image="prod.image"
         :description="prod.description" :price="prod.price"></product-item>
     </ul>
   </section>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+import { useStore } from 'vuex'
 import ProductItem from '../components/products/ProductItem.vue'
 
-export default {
-  inject: ['products'],
-  components: {
-    ProductItem,
-  },
-}
+const store = useStore()
 </script>
 
 <style scoped>
