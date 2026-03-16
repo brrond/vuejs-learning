@@ -1,13 +1,13 @@
 <script setup lang="ts">
-import { ref } from 'vue'
-import { useRouter } from 'vue-router'
+import { ref } from 'vue';
+import { useRouter } from 'vue-router';
 
-const router = useRouter()
-const email = ref('johndoe@mail.com')
-const password = ref('@#!@#asdf1231!_!@#')
+const router = useRouter();
+const email = ref('johndoe@mail.com');
+const password = ref('@#!@#asdf1231!_!@#');
 
 function login() {
-  router.push('/dashboard')
+  router.push('/dashboard');
 }
 </script>
 
@@ -34,7 +34,7 @@ function login() {
             fill="white"
           />
         </svg>
-        <span class="text-2xl font-semibold text-gray-700">V-Dashboard</span>
+        <span class="text-2xl font-semibold text-gray-700">Find a Coach</span>
       </div>
 
       <form class="mt-4" @submit.prevent="login">
@@ -44,7 +44,7 @@ function login() {
             v-model="email"
             type="email"
             class="block w-full mt-1 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-          >
+          />
         </label>
 
         <label class="block mt-3">
@@ -53,13 +53,16 @@ function login() {
             v-model="password"
             type="password"
             class="block w-full mt-1 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
-          >
+          />
         </label>
 
         <div class="flex items-center justify-between mt-4">
           <div>
             <label class="inline-flex items-center">
-              <input type="checkbox" class="text-indigo-600 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500">
+              <input
+                type="checkbox"
+                class="text-indigo-600 border-gray-200 rounded-md focus:border-indigo-600 focus:ring focus:ring-opacity-40 focus:ring-indigo-500"
+              />
               <span class="mx-2 text-sm text-gray-600">Remember me</span>
             </label>
           </div>
@@ -68,7 +71,8 @@ function login() {
             <a
               class="block text-sm text-indigo-700 fontme hover:underline"
               href="#"
-            >Forgot your password?</a>
+              >Forgot your password?</a
+            >
           </div>
         </div>
 
