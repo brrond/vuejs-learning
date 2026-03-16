@@ -12,16 +12,16 @@ const val = ref(10)
 <template>
   <user-auth></user-auth>
   <base-container v-if="store.getters.isAuthenticated" title="Vuex">
-    <h3>{{ store.getters.getCounter }}</h3>
+    <h3>{{ store.getters["counter/getCounter"] }}</h3>
     <button @click="
       store.commit({
-        type: 'increase',
+        type: 'counter/increase',
         value: val,
       })
       ">
       Add {{ val }}
     </button>
-    <button @click="store.dispatch('increment')">Increment</button>
+    <button @click="store.dispatch('counter/increment')">Increment</button>
   </base-container>
 </template>
 
